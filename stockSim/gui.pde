@@ -18,10 +18,11 @@ public void StockMoneySlider(GSlider source, GEvent event) { //_CODE_:BuyStocks:
   stockMoneyBuy = BuyStocks.getValueI();
 }
 
+public void buyStocksClicked(GButton source, GEvent event) } //_CODE_:BuyStocks:422884:
+
 public void buyStocksClicked(GButton source, GEvent event) { //_CODE_:BuyStock:762923:
-  startingMoney -= stockMoneyBuy;
-  println(startingMoney);
-}
+  println("BuyStock - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:BuyStock:762923:
 
 
 
@@ -32,18 +33,18 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  BuyStocks = new GSlider(this, 3, 41, 140, 40, 10.0);
+  BuyStocks = new GSlider(this, 465, 70, 140, 40, 10.0);
   BuyStocks.setShowValue(true);
   BuyStocks.setShowLimits(true);
   BuyStocks.setLimits(1, 0, 1000);
   BuyStocks.setNumberFormat(G4P.INTEGER, 0);
   BuyStocks.setOpaque(false);
   BuyStocks.addEventHandler(this, "StockMoneySlider");
-  StockMoneyLabel = new GLabel(this, 2, 18, 144, 20);
+  StockMoneyLabel = new GLabel(this, 465, 45, 144, 20);
   StockMoneyLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   StockMoneyLabel.setText("Select amount of money of stock");
   StockMoneyLabel.setOpaque(false);
-  BuyStock = new GButton(this, 1, 81, 80, 30);
+  BuyStock = new GButton(this, 465, 114, 80, 30);
   BuyStock.setText("Buy Stocks");
   BuyStock.addEventHandler(this, "buyStocksClicked");
 }
