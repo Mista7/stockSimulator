@@ -19,25 +19,34 @@ public void stockMoneyChanged(GSlider source, GEvent event) { //_CODE_:stockMone
 } //_CODE_:stockMoneySlider:465912:
 
 public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013:
-  if(startingMoney >= stockMoneyBuy){
-    startingMoney -= stockMoneyBuy;
-    if(stockType == "Pear"){
-      pear.sharesBought += stockMoneyBuy/pear.values.get(pear.values.size()-1);
-      println(pear.sharesBought);
-    }
-    else if(stockType == "Schattman's Shoe Store"){
-      shoeStore.sharesBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
-      println(shoeStore.sharesBought);
-    }
-    else {
-      blueberry.sharesBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
-      println(blueberry.sharesBought);
+  if(stockMoneyBuy == 0) {
+    return;
+  }
+  else {
+    if(balance >= stockMoneyBuy){
+      balance -= stockMoneyBuy;
+      if(stockType.equals("Pear")){
+        pear.sharesBought += stockMoneyBuy/pear.values.get(pear.values.size()-1);
+        println(pear.sharesBought);
+        pear.addValue(stockMoneyBuy);
+      }
+      else if(stockType.equals("Schattman's Shoe Store")){
+        shoeStore.sharesBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
+        println(shoeStore.sharesBought);
+        shoeStore.addValue(stockMoneyBuy);
+      }
+      else {
+        blueberry.sharesBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
+        println(blueberry.sharesBought);
+        blueberry.addValue(stockMoneyBuy);
+      }
     }
   }
 } //_CODE_:buyStock:944013:
 
 public void stockMenuClicked(GDropList source, GEvent event) { //_CODE_:StockMenu:499289:
   stockType = StockMenu.getSelectedText();
+  println(stockType);
 } //_CODE_:StockMenu:499289:
 
 
@@ -52,7 +61,7 @@ public void createGUI(){
   stockMoneySlider = new GSlider(this, 6, 112, 100, 40, 10.0);
   stockMoneySlider.setShowValue(true);
   stockMoneySlider.setShowLimits(true);
-  stockMoneySlider.setLimits(0, 0, startingMoney);
+  stockMoneySlider.setLimits(0, 0, initialMoney);
   stockMoneySlider.setNumberFormat(G4P.INTEGER, 0);
   stockMoneySlider.setOpaque(false);
   stockMoneySlider.addEventHandler(this, "stockMoneyChanged");
