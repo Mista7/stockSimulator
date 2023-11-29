@@ -49,7 +49,7 @@ public void createGUI(){
   stockMoneySlider = new GSlider(this, 6, 112, 100, 40, 10.0);
   stockMoneySlider.setShowValue(true);
   stockMoneySlider.setShowLimits(true);
-  stockMoneySlider.setLimits(0, 0, initialMoney);
+  stockMoneySlider.setLimits(0, 0, startingMoney);
   stockMoneySlider.setNumberFormat(G4P.INTEGER, 0);
   stockMoneySlider.setOpaque(false);
   stockMoneySlider.addEventHandler(this, "stockMoneyChanged");
