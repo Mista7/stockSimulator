@@ -22,13 +22,16 @@ public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013
   if(startingMoney >= stockMoneyBuy){
     startingMoney -= stockMoneyBuy;
     if(stockType == "Pear"){
-      println("add money to pear");
+      pear.sharesBought += stockMoneyBuy/pear.values.get(pear.values.size()-1);
+      println(pear.sharesBought);
     }
     else if(stockType == "Schattman's Shoe Store"){
-      println("addmoney to SS");
+      shoeStore.sharesBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
+      println(shoeStore.sharesBought);
     }
     else {
-      println("addmoney gto Srtrawbery");
+      blueberry.sharesBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
+      println(blueberry.sharesBought);
     }
   }
 } //_CODE_:buyStock:944013:

@@ -1,6 +1,7 @@
 class Stock{
   String name, trend;
   FloatList values = new FloatList();
+  float sharesBought;
   
   Stock(String n, float v){
     this.name = n;
