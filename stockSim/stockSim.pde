@@ -38,9 +38,9 @@ void drawStats() {
   fill(0);
   textSize(21);
   text("Balance: "+str(balance)+" $", 5, 550);
-  text("Pear Shares: "+str(pear.sharesBought), 5, 400);
-  text("Schattman's SS Shares: "+str(shoeStore.sharesBought), 5, 450);
-  text("BlueBerry Shares: "+str(blueberry.sharesBought), 5, 500);
+  text("Pear Shares: "+str(int(pear.sharesBought)), 5, 400);
+  text("Schattman's SS Shares: "+str(int(shoeStore.sharesBought)), 5, 450);
+  text("BlueBerry Shares: "+str(int(blueberry.sharesBought)), 5, 500);
   text("Stock Price: " + str(pear.values.get(pear.values.size()-1)), 250, 400 );
   text("Stock Price: " + str(shoeStore.values.get(shoeStore.values.size()-1)), 300, 450 );
   text("Stock Price: " + str(blueberry.values.get(blueberry.values.size()-1)), 250, 500 );
