@@ -14,10 +14,10 @@ class Stock{
   
   void newValue(){
     float percentage;
-    if(trend.equals("+")){
+    if(this.trend.equals("+")){
       percentage = random(0,0.01) + 1;
     }
-    else if(trend.equals("-")){
+    else if(this.trend.equals("-")){
       percentage = random(-0.01,0) + 1;
     }
     else{
@@ -26,5 +26,18 @@ class Stock{
     
     this.values.append(this.values.get(this.values.size()-1)* percentage);
   }
+ 
+ void randomizeTrend(){
+  int chance = int(random(0, 2));
+  if (chance == 1) {
+    this.trend = "+";
+  } else {
+    this.trend ="-";
+  }
+
+  this.newValue();
   
+  println(this.values.get(this.values.size()-1));
+}
+ 
 }
