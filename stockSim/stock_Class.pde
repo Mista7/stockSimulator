@@ -3,6 +3,7 @@ class Stock{
   FloatList values = new FloatList();
   float sharesBought;
   ArrayList<PVector> points;
+  float lastPrice;
   
   Stock(String n, float v){
     this.name = n;
@@ -39,8 +40,9 @@ class Stock{
 
   this.newValue();
   
-  //println(this.values.get(this.values.size()-1));
+
 }
+  
  
  //void graphStock(){
  //  int x = 300;

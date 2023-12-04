@@ -11,14 +11,14 @@ Stock shoeStore = new Stock("Schattman's Shoe Store", random(100, 230));
 Stock blueberry = new Stock("Blueberry", random(100, 230));
 
 void setup() {
-  size(600, 600);
+  size(900, 600);
+  background(255);
   createGUI();
 }
 
 void draw() {
   background(255);
   drawStats();
-
   if (tick%90 == 0){
     pear.randomizeTrend();
     //println(pear.values.get(pear.values.size()-1));
@@ -44,5 +44,13 @@ void drawStats() {
   text("Stock Price: " + str(pear.values.get(pear.values.size()-1)), 250, 400 );
   text("Stock Price: " + str(shoeStore.values.get(shoeStore.values.size()-1)), 300, 450 );
   text("Stock Price: " + str(blueberry.values.get(blueberry.values.size()-1)), 250, 500 );
+  
+  lastPrice(pear, 200,50);
+  lastPrice(shoeStore, 200,100);
+  lastPrice(blueberry, 200,150);
+}
 
+ void lastPrice(Stock s, float x, float y){
+   textSize(20);
+   text(s.name+" Last bought at: "+str(s.lastPrice), x,y);
 }

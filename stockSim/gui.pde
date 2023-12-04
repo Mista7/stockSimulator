@@ -27,18 +27,19 @@ public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013
       balance -= stockMoneyBuy;
       if(stockType.equals("Pear")){
         pear.sharesBought += stockMoneyBuy/(pear.values.get(pear.values.size()-1));
-        //println(pear.sharesBought);
-        //pear.addValue(stockMoneyBuy);
+        pear.lastPrice = pear.values.get(pear.values.size()-1);
+        lastPrice(pear, 100,100);
+
       }
       else if(stockType.equals("Schattman's Shoe Store")){
         shoeStore.sharesBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
-        //println(shoeStore.sharesBought);
-        //shoeStore.addValue(stockMoneyBuy);
+        shoeStore.lastPrice = shoeStore.values.get(shoeStore.values.size()-1);
+        lastPrice(shoeStore, 100,300);
       }
       else {
         blueberry.sharesBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
-        //println(blueberry.sharesBought);
-        //blueberry.addValue(stockMoneyBuy);
+        blueberry.lastPrice = blueberry.values.get(blueberry.values.size()-1);
+        lastPrice(blueberry, 100,500);
       }
     }
   }
