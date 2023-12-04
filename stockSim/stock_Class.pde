@@ -26,7 +26,7 @@ class Stock{
       percentage = random(-0.025, 0.025) + 1;
     }
 
-    this.values.append(this.values.get(this.values.size()-1)* percentage);
+    this.values.append(roundNum(this.values.get(this.values.size()-1)* percentage));
   }
  
  void randomizeTrend(){

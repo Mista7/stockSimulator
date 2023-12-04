@@ -6,9 +6,9 @@ String stockType = "Pear"; //initial setting on the drop down menu
 int tick = 0;
 int years = 0;
 
-Stock pear = new Stock("Pear", random(100, 230));
-Stock shoeStore = new Stock("Schattman's Shoe Store", random(100, 230));
-Stock blueberry = new Stock("Blueberry", random(100, 230));
+Stock pear = new Stock("Pear", roundNum(random(170, 190)));
+Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)));
+Stock blueberry = new Stock("Blueberry", roundNum(random(3, 6)));
 
 void setup() {
   size(900, 600);
@@ -53,4 +53,13 @@ void drawStats() {
  void lastPrice(Stock s, float x, float y){
    textSize(20);
    text(s.name+" Last bought at: "+str(s.lastPrice), x,y);
+}
+
+
+float roundNum(float n){
+  String nString = str(n);
+  float num = float(nString.substring(0,nString.indexOf(".")+3));
+  //println(n);
+  
+  return num;
 }
