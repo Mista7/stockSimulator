@@ -26,16 +26,16 @@ public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013
     if(balance >= stockMoneyBuy){
       balance -= stockMoneyBuy;
       if(stockType.equals("Pear")){
-        pear.sharesBought += stockMoneyBuy/(pear.values.get(pear.values.size()-1));
+        pear.stocksBought += stockMoneyBuy/(pear.values.get(pear.values.size()-1));
         pear.lastPrice = pear.values.get(pear.values.size()-1);
 
       }
       else if(stockType.equals("Schattman's Shoe Store")){
-        shoeStore.sharesBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
+        shoeStore.stocksBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
         shoeStore.lastPrice = shoeStore.values.get(shoeStore.values.size()-1);
       }
       else {
-        blueberry.sharesBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
+        blueberry.stocksBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
         blueberry.lastPrice = blueberry.values.get(blueberry.values.size()-1);
       }
     }
@@ -47,6 +47,26 @@ public void stockMenuClicked(GDropList source, GEvent event) { //_CODE_:StockMen
   println(stockType);
 } //_CODE_:StockMenu:499289:
 
+public void stockSoldChanged(GSlider source, GEvent event) { //_CODE_:stocksOwned:471301:
+  amountToSell = stocksOwned.getValueI();
+} //_CODE_:stocksOwned:471301:
+
+public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
+  if(stockType.equals("Pear") && amountToSell <= pear.stocksBought){
+    pear.stocksBought -= amountToSell;
+    balance += amountToSell*pear.values.get(pear.values.size()-1);
+  }
+  else if(stockType.equals("Schattman's Shoe Store") && amountToSell <= shoeStore.stocksBought){
+    shoeStore.stocksBought -= amountToSell;
+    balance += amountToSell*shoeStore.values.get(shoeStore.values.size()-1);
+  }
+  else if(stockType.equals("Blueberry") && amountToSell <= blueberry.stocksBought){
+    blueberry.stocksBought -= amountToSell;
+    balance += amountToSell*blueberry.values.get(blueberry.values.size()-1);
+  }
+  
+  } //_CODE_:sellStock:329209:
+
 
 
 // Create all the GUI controls. 
@@ -56,27 +76,49 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  stockMoneySlider = new GSlider(this, 6, 112, 100, 40, 10.0);
+  stockMoneySlider = new GSlider(this, 38, 112, 100, 40, 10.0);
   stockMoneySlider.setShowValue(true);
   stockMoneySlider.setShowLimits(true);
-  stockMoneySlider.setLimits(0, 0, initialMoney);
+  stockMoneySlider.setLimits(0, 0, balance);
   stockMoneySlider.setNumberFormat(G4P.INTEGER, 0);
+  stockMoneySlider.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockMoneySlider.setOpaque(false);
   stockMoneySlider.addEventHandler(this, "stockMoneyChanged");
-  StockBuyLabel = new GLabel(this, 5, 67, 150, 43);
+  StockBuyLabel = new GLabel(this, 15, 67, 150, 43);
   StockBuyLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   StockBuyLabel.setText("Select the amount of money to spend on stock");
+  StockBuyLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
   StockBuyLabel.setOpaque(false);
-  buyStock = new GButton(this, 7, 157, 80, 30);
+  buyStock = new GButton(this, 49, 156, 80, 30);
   buyStock.setText("Buy");
+  buyStock.setLocalColorScheme(GCScheme.RED_SCHEME);
   buyStock.addEventHandler(this, "stockBought");
-  StockMenu = new GDropList(this, 4, 31, 146, 92, 3, 10);
+  StockMenu = new GDropList(this, 15, 38, 146, 92, 3, 10);
   StockMenu.setItems(loadStrings("list_499289"), 0);
+  StockMenu.setLocalColorScheme(GCScheme.RED_SCHEME);
   StockMenu.addEventHandler(this, "stockMenuClicked");
-  label1 = new GLabel(this, 3, 8, 93, 20);
+  label1 = new GLabel(this, 33, 8, 107, 24);
   label1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label1.setText("Stock Options:");
+  label1.setLocalColorScheme(GCScheme.RED_SCHEME);
   label1.setOpaque(false);
+  stockSell = new GLabel(this, 186, 67, 114, 42);
+  stockSell.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  stockSell.setText("Select the amount of stocks to sell");
+  stockSell.setLocalColorScheme(GCScheme.RED_SCHEME);
+  stockSell.setOpaque(false);
+  stocksOwned = new GSlider(this, 193, 112, 100, 40, 10.0);
+  stocksOwned.setShowValue(true);
+  stocksOwned.setShowLimits(true);
+  stocksOwned.setLimits(0, 0, 500);
+  stocksOwned.setNumberFormat(G4P.INTEGER, 0);
+  stocksOwned.setLocalColorScheme(GCScheme.RED_SCHEME);
+  stocksOwned.setOpaque(false);
+  stocksOwned.addEventHandler(this, "stockSoldChanged");
+  sellStock = new GButton(this, 202, 154, 80, 30);
+  sellStock.setText("Sell");
+  sellStock.setLocalColorScheme(GCScheme.RED_SCHEME);
+  sellStock.addEventHandler(this, "stockSold");
 }
 
 // Variable declarations 
@@ -86,3 +128,6 @@ GLabel StockBuyLabel;
 GButton buyStock; 
 GDropList StockMenu; 
 GLabel label1; 
+GLabel stockSell; 
+GSlider stocksOwned; 
+GButton sellStock; 

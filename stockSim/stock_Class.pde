@@ -1,7 +1,7 @@
 class Stock{
   String name, trend;
   FloatList values = new FloatList();
-  float sharesBought;
+  float stocksBought;
   ArrayList<PVector> points;
   float lastPrice;
   
