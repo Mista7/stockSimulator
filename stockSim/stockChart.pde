@@ -17,6 +17,8 @@ class Chart{
   }
   
   void drawMe(){
+    int maxXlabel = round(company.values.max()*0.2)*10;
+    
     if(company.stockChanged == true) {
       xCoor.append(0);
       yCoor.append(0);
@@ -42,10 +44,10 @@ class Chart{
     textAlign(CENTER);
     fill(0);
     textSize(heightValue/10);
-    text("Number of Months",xyOrigin.x+(widthValue/2), xyOrigin.y+heightValue+(heightValue/4));
+    //text("Number of Months",xyOrigin.x+(widthValue/2), xyOrigin.y+heightValue+(heightValue/4));
     textAlign(RIGHT);
     text("0",xyOrigin.x-5, xyOrigin.y+heightValue);
-    text(str(company.values.max()*2),xyOrigin.x-5, xyOrigin.y);
+    text(str(maxXlabel),xyOrigin.x-5, xyOrigin.y);
     translate(xyOrigin.x-40, xyOrigin.y+10);
     rotate(PI);
     rotate(HALF_PI);
@@ -55,12 +57,24 @@ class Chart{
     translate(-xyOrigin.x+50, -xyOrigin.y-10);
 
     //draws the dots
-    for(int i = 0; i<company.values.size();i++){
-      fill(0,0,255);
-      circle(xCoor.get(i), yCoor.get(i), xIncrement*0.3);
-      fill(0);
-      text(str(i+1),xCoor.get(i), xyOrigin.y+heightValue+20);
+    //for(int i = 0; i<company.values.size();i++){
+    //  fill(0,0,255);
+    //  circle(xCoor.get(i), yCoor.get(i), xIncrement*0.3);
+    //  fill(0);
+    //  text(str(i+1),xCoor.get(i), xyOrigin.y+heightValue+20);
+    //}
+    noFill();
+    beginShape();
+    stroke(0, 0, 255);
+    strokeWeight(2);
+    for (int i = 0; i < company.values.size(); i++) {
+     vertex(xCoor.get(i), yCoor.get(i));
     }
+    endShape();
+    
+    fill(0);
+    textAlign(CENTER);
+    text("Month " + (company.values.size()), xyOrigin.x+(widthValue/2), xyOrigin.y+heightValue+(heightValue/4)); 
   }
   
   float getValue(float num) {
