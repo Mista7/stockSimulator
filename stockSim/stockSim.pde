@@ -11,6 +11,10 @@ Stock pear = new Stock("Pear", roundNum(random(170, 190)));
 Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)));
 Stock blueberry = new Stock("Blueberry", roundNum(random(3, 6)));
 
+Chart pearGraph = new Chart(600,20,150,300,pear);
+Chart blueGraph = new Chart(600,230,150,300,blueberry);
+Chart shoeGraph = new Chart(600,450,150,300,shoeStore);
+
 void setup() {
   size(1200, 650);
   background(140);
@@ -19,6 +23,9 @@ void setup() {
 
 void draw() {
   background(140);
+  pearGraph.drawMe();
+  blueGraph.drawMe();
+  shoeGraph.drawMe();
   drawStats();
   if (tick%90 == 0){
     pear.randomizeTrend();
@@ -38,6 +45,7 @@ void draw() {
 void drawStats() {
   fill(255);
   textSize(21);
+  textAlign(LEFT);
   text("Balance: $"+str(balance), 15, 600);
   text("Pear Shares: "+str(int(pear.stocksBought)), 15, 450);
   text("Schattman's SS Shares: "+str(int(shoeStore.stocksBought)), 15, 500);

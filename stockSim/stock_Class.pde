@@ -4,10 +4,12 @@ class Stock{
   float stocksBought;
   ArrayList<PVector> points;
   float lastPrice;
+  boolean stockChanged;
   
   Stock(String n, float v){
     this.name = n;
     this.values.append(v);
+    stockChanged = true;
   }
   
   void addValue(float v){
@@ -27,6 +29,7 @@ class Stock{
     }
 
     this.values.append(roundNum(this.values.get(this.values.size()-1)* percentage));
+    stockChanged = true;
   }
  
  void randomizeTrend(){
