@@ -40,6 +40,7 @@ public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013
       }
     }
   }
+  stockMoneySlider.setValue(0);
 } //_CODE_:buyStock:944013:
 
 public void stockMenuClicked(GDropList source, GEvent event) { //_CODE_:StockMenu:499289:
@@ -64,7 +65,7 @@ public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
     blueberry.stocksBought -= amountToSell;
     balance += amountToSell*blueberry.values.get(blueberry.values.size()-1);
   }
-  
+  stocksOwned.setValue(0);
   } //_CODE_:sellStock:329209:
 
 public void howToUseClicked(GButton source, GEvent event) { //_CODE_:howToUse:557172:
