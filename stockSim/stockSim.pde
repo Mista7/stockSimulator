@@ -10,6 +10,7 @@ String[] shoeStoreNews;
 Stock pear = new Stock("Pear", roundNum(random(170, 190)), color(255,0,0));
 Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)), color(0,255,0));
 Stock blueberry = new Stock("Blueberry", roundNum(random(3, 6)), color(0,0,255));
+boolean instructionsScreen = false;
 
 Chart pearGraph = new Chart(600,20,150,300,pear);
 Chart blueGraph = new Chart(600,230,150,300,blueberry);
@@ -23,6 +24,7 @@ void setup() {
 }
 
 void draw() {
+  if (!instructionsScreen){
   background(140);
   pearGraph.drawMe();
   blueGraph.drawMe();
@@ -30,6 +32,23 @@ void draw() {
   updateStocks();
   drawStats();
   
+  backButton.setVisible(false);
+  //  pearGraph.drawMe();
+  //blueGraph.drawMe();
+  //shoeGraph.drawMe();
+  drawStats();
+  if (tick%90 == 0){
+    pear.randomizeTrend();
+    //println(pear.values.get(pear.values.size()-1));
+    shoeStore.randomizeTrend();
+    blueberry.randomizeTrend();
+    tick+=1;
+    years+=1;
+  }
+  else{
+    tick+=1;
+  }
+  }
   //pear.graphStock();
 }
 
