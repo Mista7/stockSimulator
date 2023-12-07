@@ -26,9 +26,9 @@ void draw() {
   if (!instructionsScreen){
   background(140);
  backButton.setVisible(false);
-    pearGraph.drawMe();
-  blueGraph.drawMe();
-  shoeGraph.drawMe();
+  //  pearGraph.drawMe();
+  //blueGraph.drawMe();
+  //shoeGraph.drawMe();
   drawStats();
   if (tick%90 == 0){
     pear.randomizeTrend();
