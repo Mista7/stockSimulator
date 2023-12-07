@@ -6,10 +6,10 @@ int balance = initialMoney;
 String stockType = "Pear"; //initial setting on the drop down menu
 int tick = 0;
 int years = 0;
-
-Stock pear = new Stock("Pear", roundNum(random(170, 190)));
-Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)));
-Stock blueberry = new Stock("Blueberry", roundNum(random(3, 6)));
+String[] shoeStoreNews;
+Stock pear = new Stock("Pear", roundNum(random(170, 190)), color(255,0,0));
+Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)), color(0,255,0));
+Stock blueberry = new Stock("Blueberry", roundNum(random(3, 6)), color(0,0,255));
 
 Chart pearGraph = new Chart(600,20,150,300,pear);
 Chart blueGraph = new Chart(600,230,150,300,blueberry);
@@ -19,6 +19,7 @@ void setup() {
   size(1200, 650);
   background(140);
   createGUI();
+  shoeStoreNews = loadStrings("shoeStoreNews.txt");
 }
 
 void draw() {
@@ -26,18 +27,9 @@ void draw() {
   pearGraph.drawMe();
   blueGraph.drawMe();
   shoeGraph.drawMe();
+  updateStocks();
   drawStats();
-  if (tick%90 == 0){
-    pear.randomizeTrend();
-    //println(pear.values.get(pear.values.size()-1));
-    shoeStore.randomizeTrend();
-    blueberry.randomizeTrend();
-    tick+=1;
-    years+=1;
-  }
-  else{
-    tick+=1;
-  }
+  
   //pear.graphStock();
 }
 
@@ -74,16 +66,28 @@ float roundNum(float n){
   return num;
 }
 
+void updateStocks(){
+  if (tick%90 == 0){
+  pear.randomizeTrend();
+  shoeStore.randomizeTrend();
+  blueberry.randomizeTrend();
+  tick+=1;
+  years+=1;
+}
+else{
+  tick+=1;
+}
+}
 
 
-//void stockOwned(String n){
-//  if(n.equals("Pear")){
-//    stocksOwned.setLimits(0, 0, int(pear.stocksBought)); 
-//  }
-//  else if(n.equals("Schattman's Shoe Store")){
-//    stocksOwned.setLimits(0, 0, int(shoeStore.stocksBought));
-//  }
-//  else if(n.equals("Blueberry")){
-//    stocksOwned.setLimits(0, 0, int(blueberry.stocksBought));
-//  }
-//}
+void stockOwned(String n){
+  if(n.equals("Pear")){
+    stocksOwned.setLimits(0, 0, int(pear.stocksBought)); 
+  }
+  else if(n.equals("Schattman's Shoe Store")){
+    stocksOwned.setLimits(0, 0, int(shoeStore.stocksBought));
+  }
+  else if(n.equals("Blueberry")){
+    stocksOwned.setLimits(0, 0, int(blueberry.stocksBought));
+  }
+}
