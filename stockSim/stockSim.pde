@@ -6,6 +6,7 @@ int balance = initialMoney;
 String stockType = "Pear"; //initial setting on the drop down menu
 int tick = 0;
 int years = 0;
+boolean instructionsScreen = false;
 
 Stock pear = new Stock("Pear", roundNum(random(170, 190)));
 Stock shoeStore = new Stock("Schattman's Shoe Store", roundNum(random(100, 120)));
@@ -22,8 +23,10 @@ void setup() {
 }
 
 void draw() {
+  if (!instructionsScreen){
   background(140);
-  pearGraph.drawMe();
+ backButton.setVisible(false);
+    pearGraph.drawMe();
   blueGraph.drawMe();
   shoeGraph.drawMe();
   drawStats();
@@ -37,6 +40,7 @@ void draw() {
   }
   else{
     tick+=1;
+  }
   }
   //pear.graphStock();
 }

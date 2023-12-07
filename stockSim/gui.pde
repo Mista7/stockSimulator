@@ -68,7 +68,6 @@ public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
   } //_CODE_:sellStock:329209:
 
 public void howToUseClicked(GButton source, GEvent event) { //_CODE_:howToUse:557172:
-  instructionsPage();
   howToUse.setVisible(false);
   label1.setVisible(false);
   stockMoneySlider.setVisible(false);
@@ -77,11 +76,27 @@ public void howToUseClicked(GButton source, GEvent event) { //_CODE_:howToUse:55
   stocksOwned.setVisible(false);
   sellStock.setVisible(false);
   buyStock.setVisible(false);
-  StockBuyLabel.setVisible(false);  
+  StockBuyLabel.setVisible(false);
+  backButton.setVisible(true);
   instructionsScreen = true;
+  instructionsPage();
   
   //println("howToUse - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:howToUse:557172:
+
+public void backButtonClicked(GButton source, GEvent event) { //_CODE_:backButton:378955:
+  howToUse.setVisible(true);
+  label1.setVisible(true);
+  stockMoneySlider.setVisible(true);
+  StockMenu.setVisible(true);
+  stockSell.setVisible(true);
+  stocksOwned.setVisible(true);
+  sellStock.setVisible(true);
+  buyStock.setVisible(true);
+  StockBuyLabel.setVisible(true);
+  backButton.setVisible(false);
+  instructionsScreen = false;
+} //_CODE_:backButton:378955:
 
 
 
@@ -136,6 +151,9 @@ public void createGUI(){
   howToUse = new GButton(this, 196, 11, 80, 30);
   howToUse.setText("How to Play");
   howToUse.addEventHandler(this, "howToUseClicked");
+  backButton = new GButton(this, 319, 11, 80, 30);
+  backButton.setText("Back");
+  backButton.addEventHandler(this, "backButtonClicked");
 }
 
 // Variable declarations 
@@ -149,3 +167,4 @@ GLabel stockSell;
 GSlider stocksOwned; 
 GButton sellStock; 
 GButton howToUse; 
+GButton backButton; 
