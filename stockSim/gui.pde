@@ -67,6 +67,22 @@ public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
   
   } //_CODE_:sellStock:329209:
 
+public void howToUseClicked(GButton source, GEvent event) { //_CODE_:howToUse:557172:
+  instructionsPage();
+  howToUse.setVisible(false);
+  label1.setVisible(false);
+  stockMoneySlider.setVisible(false);
+  StockMenu.setVisible(false);
+  stockSell.setVisible(false);
+  stocksOwned.setVisible(false);
+  sellStock.setVisible(false);
+  buyStock.setVisible(false);
+  StockBuyLabel.setVisible(false);  
+  instructionsScreen = true;
+  
+  //println("howToUse - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:howToUse:557172:
+
 
 
 // Create all the GUI controls. 
@@ -79,7 +95,7 @@ public void createGUI(){
   stockMoneySlider = new GSlider(this, 38, 112, 100, 40, 10.0);
   stockMoneySlider.setShowValue(true);
   stockMoneySlider.setShowLimits(true);
-  stockMoneySlider.setLimits(0, 0, balance);
+  stockMoneySlider.setLimits(0, 0, 1000);
   stockMoneySlider.setNumberFormat(G4P.INTEGER, 0);
   stockMoneySlider.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockMoneySlider.setOpaque(false);
@@ -108,9 +124,7 @@ public void createGUI(){
   stockSell.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockSell.setOpaque(false);
   stocksOwned = new GSlider(this, 193, 112, 100, 40, 10.0);
-  stocksOwned.setShowValue(true);
-  stocksOwned.setShowLimits(true);
-  stocksOwned.setLimits(0, 0, 500);
+  stocksOwned.setLimits(0, 0, 1000);
   stocksOwned.setNumberFormat(G4P.INTEGER, 0);
   stocksOwned.setLocalColorScheme(GCScheme.RED_SCHEME);
   stocksOwned.setOpaque(false);
@@ -119,6 +133,9 @@ public void createGUI(){
   sellStock.setText("Sell");
   sellStock.setLocalColorScheme(GCScheme.RED_SCHEME);
   sellStock.addEventHandler(this, "stockSold");
+  howToUse = new GButton(this, 196, 11, 80, 30);
+  howToUse.setText("How to Play");
+  howToUse.addEventHandler(this, "howToUseClicked");
 }
 
 // Variable declarations 
@@ -131,3 +148,4 @@ GLabel label1;
 GLabel stockSell; 
 GSlider stocksOwned; 
 GButton sellStock; 
+GButton howToUse; 
