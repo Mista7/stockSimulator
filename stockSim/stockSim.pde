@@ -70,17 +70,17 @@ void drawStats() {
   textSize(21);
   textAlign(LEFT);
   text("Balance: $"+str(balance), 220, 600);
-  text("Pear Shares: "+str(int(pear.stocksBought)),260, 75);
-  text("Schattman's SS Shares: "+str(int(shoeStore.stocksBought)), 100, 275);
-  text("Blueberry Shares: "+str(int(blueberry.stocksBought)), 220, 495);
-  text("Stock Price: " + str(pear.values.get(pear.values.size()-1)), 260, 100 );
-  text("Stock Price: " + str(shoeStore.values.get(shoeStore.values.size()-1)), 100, 300 );
-  text("Stock Price: " + str(blueberry.values.get(blueberry.values.size()-1)), 220, 515 );
+  text("Pear Shares: "+str(int(pear.stocksBought)),235, 75);
+  text("Schattman's SS Shares: "+str(int(shoeStore.stocksBought)), 75, 275);
+  text("Blueberry Shares: "+str(int(blueberry.stocksBought)), 220, 500);
+  text("Stock Price: " + str(pear.values.get(pear.values.size()-1)), 235, 100 );
+  text("Stock Price: " + str(shoeStore.values.get(shoeStore.values.size()-1)), 75, 300 );
+  text("Stock Price: " + str(blueberry.values.get(blueberry.values.size()-1)), 220, 525 );
 
   fill(255, 0, 0);
-  lastPrice(pear, 260, 50);
-  lastPrice(shoeStore, 100, 250);
-  lastPrice(blueberry, 220, 470);
+  lastPrice(pear, 235, 50);
+  lastPrice(shoeStore, 75, 250);
+  lastPrice(blueberry, 220, 480);
 }
 
 void lastPrice(Stock s, float x, float y) {
