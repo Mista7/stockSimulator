@@ -77,7 +77,7 @@ public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
     blueberry.stocksBought -= amountToSell;
     balance += amountToSell*blueberry.values.get(blueberry.values.size()-1);
   }
-  
+   stockMoneySlider.setLimits(0.0, 0.0, balance);
   } //_CODE_:sellStock:329209:
 
 
@@ -88,7 +88,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window = GWindow.getWindow(this, "Stock Simulator Controls", 0, 0, 300, 250, JAVA2D);
+  window = GWindow.getWindow(this, "Stock Simulator Controls", 0, 0, 260, 250, JAVA2D);
   window.noLoop();
   window.setActionOnClose(G4P.KEEP_OPEN);
   window.addDrawHandler(this, "win_draw1");

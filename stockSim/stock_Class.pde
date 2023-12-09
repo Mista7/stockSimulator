@@ -60,7 +60,6 @@ class Stock {
       int randLine = int(random(0, this.news.length-1));
       String newsTrend = this.news[randLine].substring(0, 1);
       String news = this.news[randLine].substring(1);
-      println(this.news[0], this.news[0].substring(20,22), this.news[0].substring(20,22).equals('\n'));
 
       if (newsTrend.equals("+")) {
         this.trend = "++";
