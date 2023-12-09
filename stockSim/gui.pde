@@ -14,58 +14,45 @@
  * =========================================================
  */
 
-public void HowToPlayClicked(GButton source, GEvent event) { //_CODE_:HowToPlay:800154:
-  println("HowToPlay - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:HowToPlay:800154:
-
-public void backButtonClicked(GButton source, GEvent event) { //_CODE_:backButton:901300:
-  println("backButton - GButton >> GEvent." + event + " @ " + millis());
-} //_CODE_:backButton:901300:
-
 synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:window:639850:
-//  appc.background(230);
-//} //_CODE_:window:639850:
+  appc.background(230);
+} //_CODE_:window:639850:
 
 public void stockMenuClicked(GDropList source, GEvent event) { //_CODE_:StockMenu:418905:
-//  println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
-//} //_CODE_:StockMenu:418905:
+  println("StockMenu - GDropList >> GEvent." + event + " @ " + millis());
+} //_CODE_:StockMenu:418905:
 
 public void stockMoneyChanged(GSlider source, GEvent event) { //_CODE_:stockMoneySlider:638553:
-  stockMoneyBuy = stockMoneySlider.getValueI();
+  println("stockMoneySlider - GSlider >> GEvent." + event + " @ " + millis());
 } //_CODE_:stockMoneySlider:638553:
 
 public void stockSoldChanged(GSlider source, GEvent event) { //_CODE_:stocksOwned:897158:
-  amountToSell = stocksOwned.getValueI();
+  println("stocksOwned - GSlider >> GEvent." + event + " @ " + millis());
 } //_CODE_:stocksOwned:897158:
 
-public void stockBought(GButton source, GEvent event) { //_CODE_:buyStocks:282418:
-  if(stockMoneyBuy == 0) {
-    return;
-  }
-  else {
-    if(balance >= stockMoneyBuy){
-      balance -= stockMoneyBuy;
-      if(stockType.equals("Pear")){
-        pear.stocksBought += stockMoneyBuy/(pear.values.get(pear.values.size()-1));
-        pear.lastPrice = pear.values.get(pear.values.size()-1);
-
-      }
-      else if(stockType.equals("Schattman's Shoe Store")){
-        shoeStore.stocksBought += stockMoneyBuy/shoeStore.values.get(shoeStore.values.size()-1);
-        shoeStore.lastPrice = shoeStore.values.get(shoeStore.values.size()-1);
-      }
-      else {
-        blueberry.stocksBought += stockMoneyBuy/blueberry.values.get(blueberry.values.size()-1);
-        blueberry.lastPrice = blueberry.values.get(blueberry.values.size()-1);
-      }
-    }  
-  }
-  }
-//} //_CODE_:buyStocks:282418:
+public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:282418:
+  println("buyStock - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:buyStock:282418:
 
 public void stockSold(GButton source, GEvent event) { //_CODE_:sellStocks:695993:
-  stocksOwned.setValue(0);
-  } //_CODE_:sellStocks:695993:
+  println("sellStocks - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:sellStocks:695993:
+
+public void howToUseClicked(GButton source, GEvent event) { //_CODE_:howToUse:962401:
+  println("howToUse - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:howToUse:962401:
+
+synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:window1:951546:
+  appc.background(230);
+} //_CODE_:window1:951546:
+
+public void textfield1_change1(GTextField source, GEvent event) { //_CODE_:textfield1:708575:
+  println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
+} //_CODE_:textfield1:708575:
+
+public void textarea2_change1(GTextArea source, GEvent event) { //_CODE_:textarea2:753584:
+  println("textarea2 - GTextArea >> GEvent." + event + " @ " + millis());
+} //_CODE_:textarea2:753584:
 
 
 
@@ -76,12 +63,6 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  HowToPlay = new GButton(this, 2, 3, 80, 30);
-  HowToPlay.setText("How To Play");
-  HowToPlay.addEventHandler(this, "HowToPlayClicked");
-  backButton = new GButton(this, 98, 2, 80, 30);
-  backButton.setText("Back");
-  backButton.addEventHandler(this, "backButtonClicked");
   window = GWindow.getWindow(this, "Window title", 0, 0, 300, 250, JAVA2D);
   window.noLoop();
   window.setActionOnClose(G4P.KEEP_OPEN);
@@ -91,53 +72,72 @@ public void createGUI(){
   label1.setText("Stock Options:");
   label1.setLocalColorScheme(GCScheme.RED_SCHEME);
   label1.setOpaque(false);
-  StockMenu = new GDropList(window, 6, 29, 112, 80, 3, 10);
+  StockMenu = new GDropList(window, 6, 29, 146, 72, 3, 10);
   StockMenu.setItems(loadStrings("list_418905"), 0);
   StockMenu.setLocalColorScheme(GCScheme.RED_SCHEME);
   StockMenu.addEventHandler(this, "stockMenuClicked");
-  label2 = new GLabel(window, 6, 74, 113, 39);
-  label2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label2.setText("Select Amount of Money to spend");
-  label2.setLocalColorScheme(GCScheme.RED_SCHEME);
-  label2.setOpaque(false);
-  stockMoneySlider = new GSlider(window, 12, 123, 100, 40, 10.0);
+  StockBuyLabel = new GLabel(window, 2, 116, 113, 39);
+  StockBuyLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  StockBuyLabel.setText("Select Amount of Money to spend");
+  StockBuyLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
+  StockBuyLabel.setOpaque(false);
+  stockMoneySlider = new GSlider(window, 10, 157, 100, 40, 10.0);
   stockMoneySlider.setLimits(0.0, 0.0, 1000000.0);
   stockMoneySlider.setNumberFormat(G4P.DECIMAL, 0);
   stockMoneySlider.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockMoneySlider.setOpaque(false);
   stockMoneySlider.addEventHandler(this, "stockMoneyChanged");
-  label3 = new GLabel(window, 131, 75, 106, 38);
-  label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label3.setText("Select Amount of Stocks to Sell");
-  label3.setLocalColorScheme(GCScheme.RED_SCHEME);
-  label3.setOpaque(false);
-  stocksOwned = new GSlider(window, 133, 123, 100, 40, 10.0);
+  stockSell = new GLabel(window, 125, 116, 106, 38);
+  stockSell.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  stockSell.setText("Select Amount of Stocks to Sell");
+  stockSell.setLocalColorScheme(GCScheme.RED_SCHEME);
+  stockSell.setOpaque(false);
+  stocksOwned = new GSlider(window, 130, 157, 100, 40, 10.0);
   stocksOwned.setLimits(0.0, 0.0, 100000.0);
   stocksOwned.setNumberFormat(G4P.DECIMAL, 2);
   stocksOwned.setLocalColorScheme(GCScheme.RED_SCHEME);
   stocksOwned.setOpaque(false);
   stocksOwned.addEventHandler(this, "stockSoldChanged");
-  buyStocks = new GButton(window, 23, 172, 80, 30);
-  buyStocks.setText("Buy");
-  buyStocks.setLocalColorScheme(GCScheme.RED_SCHEME);
-  buyStocks.addEventHandler(this, "stockBought");
-  sellStocks = new GButton(window, 142, 172, 80, 30);
+  buyStock = new GButton(window, 21, 199, 80, 30);
+  buyStock.setText("Buy");
+  buyStock.setLocalColorScheme(GCScheme.RED_SCHEME);
+  buyStock.addEventHandler(this, "stockBought");
+  sellStocks = new GButton(window, 139, 200, 80, 30);
   sellStocks.setText("Sell");
   sellStocks.setLocalColorScheme(GCScheme.RED_SCHEME);
   sellStocks.addEventHandler(this, "stockSold");
+  howToUse = new GButton(window, 193, 10, 80, 30);
+  howToUse.setText("How to Use");
+  howToUse.setLocalColorScheme(GCScheme.RED_SCHEME);
+  howToUse.addEventHandler(this, "howToUseClicked");
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 250, 230, JAVA2D);
+  window1.noLoop();
+  window1.setActionOnClose(G4P.KEEP_OPEN);
+  window1.addDrawHandler(this, "win_draw2");
+  textfield1 = new GTextField(window1, 2, 5, 238, 22, G4P.SCROLLBARS_NONE);
+  textfield1.setText("Welcome to Stock Simulator");
+  textfield1.setOpaque(true);
+  textfield1.addEventHandler(this, "textfield1_change1");
+  textarea2 = new GTextArea(window1, 3, 28, 242, 197, G4P.SCROLLBARS_NONE);
+  textarea2.setText("To play, start by buying a stock from the companies found in the dropdown menu. This is done by dragging the slider above the buy button indicating how much money you want to put into the stock. Once you have some stocks, try selling them by sliding the other slider and clicking sell. See how much bank you can make!");
+  textarea2.setOpaque(true);
+  textarea2.addEventHandler(this, "textarea2_change1");
   window.loop();
+  window1.loop();
 }
 
 // Variable declarations 
 // autogenerated do not edit
-GButton HowToPlay; 
-GButton backButton; 
 GWindow window;
 GLabel label1; 
 GDropList StockMenu; 
-GLabel label2; 
+GLabel StockBuyLabel; 
 GSlider stockMoneySlider; 
-GLabel label3; 
+GLabel stockSell; 
 GSlider stocksOwned; 
-GButton buyStocks; 
+GButton buyStock; 
 GButton sellStocks; 
+GButton howToUse; 
+GWindow window1;
+GTextField textfield1; 
+GTextArea textarea2; 

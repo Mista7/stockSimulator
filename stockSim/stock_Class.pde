@@ -1,4 +1,4 @@
-class Stock{
+class Stock {
   String name, trend;
   FloatList values = new FloatList();
   float stocksBought;
@@ -6,101 +6,82 @@ class Stock{
   float lastPrice;
   boolean stockChanged;
   color col;
-  
-  Stock(String n, float v, color c){
+  boolean bankrupt = false;
+  String[] news;
+  String currNews ="";
+  color newsCol;
+
+  Stock(String n, float v, color c, String[] nw) {
     this.name = n;
     this.values.append(v);
     stockChanged = true;
     this.col = c;
+    this.news = nw;
   }
-  
-  void addValue(float v){
+
+  void addValue(float v) {
     this.values.append(v);
   }
-  
-  void newValue(){
+
+  void newValue() {
     float percentage;
-    if(this.trend.equals("+")){
-      percentage = random(0.025,0.07) + 1;
-    }
-    else if(this.trend.equals("-")){
-      percentage = random(-0.7,-0.6) + 1;
-    }
-    else if(this.trend.equals("++")){
-      percentage = random(0.7,0.6)+1;
-    }
-    else if(this.trend.equals("--")){
-      percentage = random(-0.6,-7)+1;
-    }
-    else{
-      percentage = random(-0.7, 0.7) + 1;
+    if (this.trend.equals("+")) {
+      percentage = random(0.025, 0.07) + 1;
+    } else if (this.trend.equals("-")) {
+      percentage = random(-0.07, -0.025) + 1;
+    } else if (this.trend.equals("++")) {
+      percentage = random(0.2, 0.4)+1;
+    } else if (this.trend.equals("--")) {
+      percentage = random(-0.2, -0.4)+1;
+    } else {
+      percentage = random(-0.1, 0.1) + 1;
     }
 
-    this.values.append(roundNum(this.values.get(this.values.size()-1)* percentage));
+    float nextVal = roundNum(this.values.get(this.values.size()-1)* percentage);
+    if (nextVal <=0.0) {
+      this.values.append(0.00000000);
+      this.bankrupt = true;
+    } else {
+      this.values.append(nextVal);
+    }
     stockChanged = true;
   }
- 
- String randomizeTrend(){
-  float chance = random(0, 2);
-  float newsChance = random(0,100);
-  if (chance >= 0.5 && newsChance>5) {
-    this.trend = "+";
-  } else if(newsChance>5 && chance<=0.5) {
-    this.trend ="-";
-  }
-  else{
-    String newsTrend = shoeStoreNews[int(random(0,shoeStoreNews.length-1))].substring(0,1);
-    String news = shoeStoreNews[int(random(0,shoeStoreNews.length-1))].substring(1);
-    //text(news,500,30);
-    
-    if(newsTrend == "+"){
-      this.trend = "++";
+
+  String randomizeTrend() {
+    float chance = random(0, 100);
+    float newsChance = random(0, 100);
+    if (chance >= 50 && newsChance>5) {
+      this.trend = "+";
+    } 
+    else if (newsChance>5 && chance<50) {
+      this.trend ="-";
+    } 
+    else {
+      int randLine = int(random(0, this.news.length-1));
+      String newsTrend = this.news[randLine].substring(0, 1);
+      String news = this.news[randLine].substring(1);
+      println(newsTrend, news);
+
+      if (newsTrend.equals("+")) {
+        this.trend = "++";
+        this.newsCol = color(0, 255, 0);
+      } 
+      else if (newsTrend.equals("-")) {
+        this.trend = "--";
+        this.newsCol = color(255, 0, 0);
+      }
+      this.newValue();
+      this.currNews = news;
+      return news;
     }
-    else{
-      this.trend = "--";
-    }
+
     this.newValue();
-    return news;
+    return "";
   }
 
-  this.newValue();
-  return "";
 
-}
-  
-  
-void newsUpdate(){
-  
-  
-  
-}
- 
- //void graphStock(){
- //  int x = 10;
- //  float y = this.values.get(this.values.size()-2);
- //  float y1 = this.values.get(this.values.size()-1);
- //  int xAxis = 250/years+300;
- //  int yAxis  = 230;
-   
- //  fill(this.col);
- //  line(10,250, 260, 250); // x range = 300-550
- //  line(10,250, 10, 10); // y range = 100-350
-   
- //  for(int i = 1; i<this.values.size(); i++){
- //    if(years>=2){
- //      float x2 = map(x,0,width,0,250);
- //      float y2 = map(y,0,height,0,250);
- //      float y3 = map(y1,0,height, 0,250);
- //      line(x2,y2, 260/this.values.size(), y3);
-  
- //      x+=50;
- //      y = this.values.get(i-1);
- //      y1  = this.values.get(i);
- //    }
- //  }
-   
- //  if(years>=2){
- //    line(x,y, x+xAxis, yAxis+y);
- //  }
- //}
+  void newsUpdate(int x, int y) {
+    fill(this.newsCol);
+    text(this.currNews, x, y);
+  }
 }
