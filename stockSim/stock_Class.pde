@@ -19,12 +19,11 @@ class Stock {
     this.news = nw;
   }
 
-  void addValue(float v) {
-    this.values.append(v);
-  }
 
+// Adds new value to the stock everytime the updateStocks function is called
   void newValue() {
     float percentage;
+    //Changes the values by multiplying a percentage that is higher or lower based on the trend
     if (this.trend.equals("+")) {
       percentage = random(0.025, 0.07) + 1;
     } else if (this.trend.equals("-")) {
@@ -47,6 +46,7 @@ class Stock {
     stockChanged = true;
   }
 
+// Randomizes whether the stock increases or decreases
   String randomizeTrend() {
     float chance = random(0, 100);
     float newsChance = random(0, 100);
@@ -56,6 +56,7 @@ class Stock {
     else if (newsChance>5 && chance<50) {
       this.trend ="-";
     } 
+    // If the news chance is triggered, then the news percentages are chosen and the stock values change dramatically
     else {
       int randLine = int(random(0, this.news.length-1));
       String newsTrend = this.news[randLine].substring(0, 1);
@@ -78,7 +79,7 @@ class Stock {
     return "";
   }
 
-
+//Prints the latest news onto the screen
   void newsUpdate(int x, int y) {
     fill(this.newsCol);
     text(this.currNews, x, y);

@@ -1,3 +1,4 @@
+// Graphs the values for all the stock companies
 class Chart {
   //fields
   Stock company;
@@ -16,6 +17,7 @@ class Chart {
     company = s;
   }
 
+// Draws the graph on screen
   void drawMe() {
     int maxXlabel = round(company.values.max()*0.2)*10;
 
