@@ -5,7 +5,7 @@ int initialMoney = 50000;
 int balance = initialMoney;
 String stockType = "Pear"; //initial setting on the drop down menu
 int tick = 0;
-int monthDuration = 90;
+int monthDuration = 2;
 int months = 0;
 Stock pear, blueberry, shoeStore;
 Chart pearGraph, blueGraph, shoeGraph;
@@ -46,9 +46,7 @@ void draw() {
     //blueGraph.drawMe();
     //shoeGraph.drawMe();
     drawStats();
-    pear.newsUpdate(500, 10);
-    blueberry.newsUpdate(500, 150);
-    shoeStore.newsUpdate(500, 300);
+    newsUpdate();
     if (tick%90 == 0) {
       pear.randomizeTrend();
       //println(pear.values.get(pear.values.size()-1));
@@ -100,7 +98,6 @@ float roundNum(float n) {
     else if (decimalPart.length()==1) {
       decimalPart = decimalPart + 0;
     }
-
     float num = intPart+float(decimalPart);
 
     return num;
@@ -127,11 +124,27 @@ void stockOwned() {
   String n = stockType;
   if (n.equals("Pear")) {
     stocksOwned.setLimits(0, 0, int(pear.stocksBought));
+    stocksOwned.setNbrTicks(int(pear.stocksBought/2));
   } 
   else if (n.equals("Schattman's Shoe Store")) {
     stocksOwned.setLimits(0, 0, int(shoeStore.stocksBought));
+    stocksOwned.setNbrTicks(int(shoeStore.stocksBought/2));
   } 
   else if (n.equals("Blueberry")) {
     stocksOwned.setLimits(0, 0, int(blueberry.stocksBought));
+    stocksOwned.setNbrTicks(int(blueberry.stocksBought/2));
   }
+}
+
+
+void newsUpdate(){
+  fill(0);
+  text("Pear: ", 900, 45); 
+  text("Schattman's Shoe Store: ", 900, 235);
+  text("Blueberry: ", 900, 380);
+  pear.newsUpdate(900, 70);
+  blueberry.newsUpdate(900, 405);
+  shoeStore.newsUpdate(900, 260);
+
+  
 }
