@@ -2,7 +2,7 @@ import g4p_controls.*;
 
 // Change these values
 int initialMoney = 50000; // How much money you start with
-int monthDuration = 1; // Higher value means stocks take longer to change
+int monthDuration = 75; // Higher value means stocks take longer to change
 
 // Dont't change these values
 int stockMoneyBuy;
