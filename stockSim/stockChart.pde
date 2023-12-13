@@ -54,9 +54,9 @@ class Chart {
     rotate(PI);
     rotate(HALF_PI);
     textAlign(RIGHT);
-    text("Price of Stock (CAD)", 0, 0);
+    text("Price of Stock (CAD)", 0, 15);
     rotate(HALF_PI);
-    translate(-xyOrigin.x+50, -xyOrigin.y-10);
+    translate(-xyOrigin.x+40, -xyOrigin.y-10);
 
     //draws the dots
     for (int i = 0; i<company.values.size(); i++) {
@@ -75,7 +75,7 @@ class Chart {
 
     fill(0);
     textAlign(CENTER);
-    text("Month " + (company.values.size()), xyOrigin.x+(widthValue/2), xyOrigin.y+heightValue+(heightValue/4));
+    text("Month " + (company.values.size()), xyOrigin.x+(widthValue/2), xyOrigin.y+heightValue+(heightValue/6));
   }
 
   float getValue(float num) {

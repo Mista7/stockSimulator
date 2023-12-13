@@ -18,14 +18,6 @@ synchronized public void win_draw2(PApplet appc, GWinData data) { //_CODE_:windo
   appc.background(230);
 } //_CODE_:window1:951546:
 
-public void textfield1_change1(GTextField source, GEvent event) { //_CODE_:textfield1:708575:
-  //println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
-} //_CODE_:textfield1:708575:
-
-public void textarea2_change1(GTextArea source, GEvent event) { //_CODE_:textarea2:753584:
-  //println("textarea2 - GTextArea >> GEvent." + event + " @ " + millis());
-} //_CODE_:textarea2:753584:
-
 synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:window:639850:
   appc.background(230);
 } //_CODE_:window:639850:
@@ -59,7 +51,7 @@ public void stockBought(GButton source, GEvent event) { //_CODE_:buyStock:944013
 } //_CODE_:buyStock:944013:
 public void stockMenuClicked(GDropList source, GEvent event) { //_CODE_:StockMenu:499289:
   stockType = StockMenu.getSelectedText();
-
+  stockOwned();
 } //_CODE_:StockMenu:499289:
 public void stockSoldChanged(GSlider source, GEvent event) { //_CODE_:stocksOwned:471301:
   amountToSell = stocksOwned.getValueI();
@@ -78,6 +70,7 @@ public void stockSold(GButton source, GEvent event) { //_CODE_:sellStock:329209:
     balance += amountToSell*blueberry.values.get(blueberry.values.size()-1);
   }
    stockMoneySlider.setLimits(0.0, 0.0, balance);
+   stockOwned();
   } //_CODE_:sellStock:329209:
 
 
@@ -88,7 +81,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window = GWindow.getWindow(this, "Stock Simulator Controls", 0, 0, 260, 250, JAVA2D);
+  window = GWindow.getWindow(this, "Stock Simulator Controls", 0, 0, 260, 215, JAVA2D);
   window.noLoop();
   window.setActionOnClose(G4P.KEEP_OPEN);
   window.addDrawHandler(this, "win_draw1");
@@ -101,12 +94,12 @@ public void createGUI(){
   StockMenu.setItems(loadStrings("list_418905"), 0);
   StockMenu.setLocalColorScheme(GCScheme.RED_SCHEME);
   StockMenu.addEventHandler(this, "stockMenuClicked");
-  StockBuyLabel = new GLabel(window, 2, 116, 113, 39);
+  StockBuyLabel = new GLabel(window, 2, 96, 113, 39);
   StockBuyLabel.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   StockBuyLabel.setText("Select Amount of Money to spend");
   StockBuyLabel.setLocalColorScheme(GCScheme.RED_SCHEME);
   StockBuyLabel.setOpaque(false);
-  stockMoneySlider = new GSlider(window, 10, 157, 100, 40, 10.0);
+  stockMoneySlider = new GSlider(window, 10, 137, 100, 40, 10.0);
   stockMoneySlider.setShowValue(true);
   stockMoneySlider.setShowLimits(true);
   stockMoneySlider.setLimits(0.0, 0.0, balance);
@@ -114,12 +107,12 @@ public void createGUI(){
   stockMoneySlider.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockMoneySlider.setOpaque(false);
   stockMoneySlider.addEventHandler(this, "stockMoneyChanged");
-  stockSell = new GLabel(window, 125, 116, 106, 38);
+  stockSell = new GLabel(window, 125, 96, 106, 38);
   stockSell.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   stockSell.setText("Select Amount of Stocks to Sell");
   stockSell.setLocalColorScheme(GCScheme.RED_SCHEME);
   stockSell.setOpaque(false);
-  stocksOwned = new GSlider(window, 130, 157, 100, 40, 10.0);
+  stocksOwned = new GSlider(window, 130, 137, 100, 40, 10.0);
   stocksOwned.setShowValue(true);
   stocksOwned.setShowLimits(true);
   stocksOwned.setLimits(0.0, 0.0, 0.0);
@@ -127,28 +120,28 @@ public void createGUI(){
   stocksOwned.setLocalColorScheme(GCScheme.RED_SCHEME);
   stocksOwned.setOpaque(false);
   stocksOwned.addEventHandler(this, "stockSoldChanged");
-  buyStock = new GButton(window, 21, 199, 80, 30);
+  buyStock = new GButton(window, 21, 179, 80, 30);
   buyStock.setText("Buy");
   buyStock.setLocalColorScheme(GCScheme.RED_SCHEME);
   buyStock.addEventHandler(this, "stockBought");
-  sellStocks = new GButton(window, 139, 200, 80, 30);
+  sellStocks = new GButton(window, 139, 180, 80, 30);
   sellStocks.setText("Sell");
   sellStocks.setLocalColorScheme(GCScheme.RED_SCHEME);
   sellStocks.addEventHandler(this, "stockSold");
   window.loop();
-  window1 = GWindow.getWindow(this, "How to Use", 0, 0, 250, 230, JAVA2D);
+  window1 = GWindow.getWindow(this, "How to Play", 0, 0, 250, 198, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.CLOSE_WINDOW);
   window1.addDrawHandler(this, "win_draw2");
-  textfield1 = new GTextField(window1, 2, 5, 238, 22, G4P.SCROLLBARS_NONE);
-  textfield1.setText("Welcome to Stock Simulator");
-  textfield1.setOpaque(true);
-  textfield1.addEventHandler(this, "textfield1_change1");
-  textarea2 = new GTextArea(window1, 3, 28, 242, 197, G4P.SCROLLBARS_NONE);
-  textarea2.setText("To play, start by buying a stock from the companies found in the dropdown menu. This is done by dragging the slider above the buy button indicating how much money you want to put into the stock. Once you have some stocks, try selling them by sliding the other slider and clicking sell. See how much bank you can make!");
-  textarea2.setOpaque(true);
-  textarea2.addEventHandler(this, "textarea2_change1");
-  //window.loop();
+  label2 = new GLabel(window1, 7, 29, 238, 170);
+  label2.setTextAlign(GAlign.LEFT, GAlign.TOP);
+  label2.setText("To play, start by buying a stock from the companies found in the dropdown menu. This is done by dragging the slider above the buy button indicating how much money you want to put into the stock. Once you have some stocks, try selling them by sliding the other slider and clicking sell. You can press 'P' to pause the simulation to buy stocks at an oppurtune value! Press 'P' again to unpause and see your transaction being updated! See how much bank you can make!");
+  label2.setOpaque(false);
+  label3 = new GLabel(window1, 4, 4, 242, 20);
+  label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label3.setText("Welcome to Stock Simulator");
+  label3.setOpaque(false);
+  window.loop();
   window1.loop();
 }
 
@@ -164,5 +157,5 @@ GSlider stocksOwned;
 GButton buyStock; 
 GButton sellStocks; 
 GWindow window1;
-GTextField textfield1; 
-GTextArea textarea2; 
+GLabel label2; 
+GLabel label3; 

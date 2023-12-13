@@ -1,6 +1,6 @@
-+New Blueberry Brick!released! Stock prices\nexplode!
--CEO of Blueberry, I.M. Blu, seen\nspelling raspberry without\nthe P! Stock prices\nplummet!
-+Blueberry parnters with\nBricks R Us! Blueberry Bricks\nget significantly more durable!\nStock prices BOOM!
--Blueberry Brick receive\nhorrendous reviews. Stock\nprices take a HUGE hit!
-+Blueberry Brick's durability\nreported to be 10x better!\nStock prises rise steadily.
--Blueberry SUED due to injury\ncaused by Blueberry Brick! Stock\nprices drop significantly.
+"+New Blueberry Brick released! \nStock prices explode!",
+"-CEO of Blueberry, I.M. Blu, seen\nspelling raspberry without\nthe P! Stock prices\nplummet!",
+"+Blueberry parnters with\nBricks R Us! Blueberry Bricks\nget significantly more durable!\nStock prices BOOM!",
+"-Blueberry Brick receive\nhorrendous reviews. Stock\nprices take a HUGE hit!",
+"+Blueberry Brick's durability\nreported to be 10x better!\nStock prises rise steadily.",
+"-Blueberry SUED due to injury\ncaused by Blueberry Brick! \nStock prices drop significantly."
